@@ -145,7 +145,7 @@ class Bullet(GameObject):
             if obj != self:
                 if (self.get_center() - obj.get_center()).length() < 1000:
                     d = obj.get_center() - self.get_center()
-                    obj.velocity += d.normalize() * 1000 * (50/d.length())**(1.5)
+                    obj.velocity += d.normalize() * 1000 * (50/d.length())**(1)
         self.die()
         if self.does_have_sub_bullets:
             for _ in range(10):
