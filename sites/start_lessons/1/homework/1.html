@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Назва відео</title>
+</head>
+<style>
+    /* Для всього документу */
+    body::-webkit-scrollbar {
+        width: 8px;  /* Ширина скроллбара */
+    }
+
+    /* Стиль для самого скроллбара */
+    body::-webkit-scrollbar-thumb {
+        background: #888;  /* Колір скроллбара */
+        border-radius: 4px;  /* Закруглені кути */
+    }
+
+    /* Стиль при наведенні миші */
+    body::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    body {
+        width: calc(100vw - 10px);
+        font-family: 'Roboto';
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+        /* overflow-y: hidden; */
+    }
+
+    #upper_panel {
+        border: 1px solid black;
+        border-radius: 10px;
+        height: 5vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #upper_panel img {
+        height: 100%;
+        /* margin-left: 2%; */
+    }
+
+    #content{
+        font-family: 'Roboto';
+        display:flex;
+        
+        flex-direction: row;
+        background-color: #fff;
+    }
+
+    #video {
+        width: 100%;
+        height: 60vh;
+    }
+
+    #side {
+        width: 5%;
+        }
+        
+    #img_place{
+        width: 65%;
+        border: 1px solid black;
+        }
+    
+    .vid{
+        margin-left: 5%;
+        margin-top: 3%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+    }
+    .vid img{
+        width: 40%;
+        height: 100%;
+    }
+    .vid p {
+        width: 60%;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+    }
+    #vids{
+        width: 30%;
+        height: 23vh;
+        }
+    #subscribe{
+        margin-left: 110%;
+        margin-top: 0%;
+        }
+    #like{
+        margin-left: 600%;
+        margin-top: 0%;
+        }
+    #dislike{
+        margin-left: 700%;
+        margin-top: 0%;
+    }
+
+    #buttons {
+        display: flex;
+        height: 8vh;
+    }
+
+    .inner_div {
+        display: flex;
+        width: 50%;
+        align-items: center;
+    }
+
+    #channel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 1%;
+        font-size: small;
+    }
+
+    #channel_img {
+        height: 80%;
+    }
+
+    #channel h3 {
+        margin: 0px;
+    }
+
+    #channel p {
+        margin: 0px;
+    }
+
+    #subscribe_button {
+        margin-left: 5%;
+        background-color: #2f2f2f;
+        border-radius: 20px;
+        height: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 10px;
+    }
+
+    #left_div {
+        justify-content: flex-start;
+    }
+    #right_div {
+        justify-content: flex-end;
+    }
+
+    #right_div div {
+        height: 100%;
+        border: 1px solid black;
+        min-width: 20%;
+        display: flex;
+    }
+</style>
+<body>
+    <div id="upper_panel">
+        Youtube
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+        
+    </div>
+    <div id="content">
+        <h5 id="side"></h5>
+        <div id="img_place">
+            <img id="video" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+            <div id="text">
+            <h3>text</h3>
+            <div id="buttons">
+                <div class="inner_div" id="left_div">
+                    <img id="channel_img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+                    <div id="channel">
+                        <h3 id="channel_name">Channel name</h3>
+                        <p id="subscribers">479K subscribers</p>
+                    </div>    
+                    <div id="subscribe_button">
+                        Subscribe
+                    </div>
+                </div>
+                <div class="inner_div" id="right_div">
+                    <div id="likes">
+                        <p>L</p><p>159</p>
+                    </div>
+                    <p>D</p>
+                    <div class="share">
+                        <p>-></p><p>Share</p>
+                    </div>
+                    <div class="download">
+                        <p>V</p><p>Download</p>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        <div id="vids">
+            <div class="vid">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+                <div class="text">
+                    <h3>THAT VIDEO</h3>
+                    <p>=-==</p>
+                </div>
+            </div>
+            <div class="vid">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+                <div class="text">
+                    <h3>My first anime</h3>
+                    <p>My first anime</p>
+                </div>
+            </div>
+            <div class="vid">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+            </div>
+            <div class="vid">
+
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAZlBMVEX/AAD/////8fH/Ozv/3d3/vLz/z8//+Pj/c3P/YmL/4eH/2Nj/+/v/oqL/lZX/Pz//MjL/enr/5ub/Kyv/q6v/g4P/6+v/wcH/TU3/Wlr/Xl7/bW3/np7/Rkb/VVX/GBj/sbH/yMiQgwrPAAACa0lEQVR4nO3aYXOiMBAG4BDAYFBQRCxaxf7/P3nRc7yAcMMGyDt3s/ut0zJ5tJuwSVYE4BAMYAADGMAABjCAAQxgwD8CUEpKWRWF1tEz0tUj4lc8f0h//0broqjMHys1EbBRlU5P5TY7Jklyvn3lebhrGjEimmYX5vnX7WwePGbb8pTqSm0ogKjM9vVhzFjj41DvszIaAdjE53lHbsc57n4VHUAcLjn8I8L4LwB1WXr4R1zUEEDufIwvxE72A6qZ8244DlUvoPY1vhB1H+Db3/hCfH8CpM/xhZAfgMwvIPsA+B1fiC4g8g2IOoCtb8C2A0h8A5I2QF19A66qBfA8CR8hWwDtH6BbgNg/IG4BvE+C9zQQoEnwngYvwNo/YN0C3PwDbjZAkpaBwyx161XaAFItmsvTDMVbaAP0qB2H9aiaXr402gKkpEefdrmfKkgtwIoOMG/wiVNnZQF+XABBcMqnAH4sAG0lfgNMKpCSpx2xBbg7AkwqHJ0BdwtQOgOCoHBNhXImgMkgt2rGBtBq8i4gULQP8IpsPoBbKtgA2qLSAzCpQN7a7+cF0FPBBtDqkQGASQXSBj+xALSZNAQwBEoqrBcAkFJhGYB5s45Nhf8UAP4XOCchZBpeLAB8IYIvxfCXEfx1DC9I4CXZ3RkwU1EKL8vhGxP41gy+OYVvz+EHFPAjGvghFf6YDn5QCT+qhR9Ww4/r4RcW8Csb+KUV/toOfnEJv7rFX17Dr+/hDQz4Fg58Ewu8jQffyBTAW7kCfDPbM6DtfH++iqkNjbV7Q2NPOLR0Dg7pBFguGMAABjCAAQxgAAMYwAA44BdHRDe4boGIcQAAAABJRU5ErkJggg==" alt="photo">
+            </div>
+        </div>
+    <div>
+</body>
+</html>
