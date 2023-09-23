@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 candidates_data = [
@@ -58,7 +59,7 @@ def test_lol(request):
     return HttpResponse('<h1>LOL page</h1><p>This is my first test page</p>')
 
 
-def candidates(request):
+def candidates_old(request):
     html = '<table>'
     headers = ['Surname', 'Age', 'TestTask', 'Inteview', 'Salary']
 
@@ -72,3 +73,11 @@ def candidates(request):
     html += '</table>'
 
     return HttpResponse(html)
+
+
+def candidates(request):
+    return render(request, 'candidates.html', context={
+        'amount': len(candidates_data),
+        'headers': ['Surname', 'Age', 'TestTask', 'Inteview', 'Salary'],
+        'candidates_data': candidates_data,
+    })
