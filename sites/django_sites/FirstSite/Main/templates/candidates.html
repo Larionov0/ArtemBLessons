@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates</title>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0 300px;
+        padding: 0;
+    }
+    table {
+        border-collapse: collapse;
+        border: 1px solid black;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid black;
+        width: 20%;
+        text-align: left;
+    }
+    h1 {
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Candidates</h1>
+    <p>Amount of candidates: {{ amount }}</p>
+    <table>
+        <tr>
+            {% for header in headers %}
+                <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for candidate in candidates_data %}
+            <tr>
+                <td>{{ candidate.surname }}</td>
+                <td>{{ candidate.age }}</td>
+                <td>{{ candidate.test_task_mark }}</td>
+                <td>{{ candidate.interview_mark }}</td>
+                <td>{{ candidate.salary_exp }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
